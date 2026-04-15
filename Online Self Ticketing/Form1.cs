@@ -29,7 +29,7 @@ namespace Online_Self_Ticketing
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            // VALIDASI
+            //VALIDASI
             if (txtEmail.Text == "")
             {
                 MessageBox.Show("Email tidak boleh kosong!");
