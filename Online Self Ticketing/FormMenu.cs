@@ -16,7 +16,6 @@ namespace Online_Self_Ticketing
         {
             InitializeComponent();
         }
-
         private void btnFilm_Click(object sender, EventArgs e)
         {
             FormFilm f = new FormFilm();
