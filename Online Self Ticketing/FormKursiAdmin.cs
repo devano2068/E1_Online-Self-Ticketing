@@ -60,7 +60,6 @@ namespace Online_Self_Ticketing
             try
             {
                 int id = Convert.ToInt32(dataGridView1.CurrentRow.Cells["kursi_id"].Value);
-
                 conn.Open();
 
                 SqlCommand cmd = new SqlCommand(
