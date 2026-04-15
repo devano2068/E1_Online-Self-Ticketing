@@ -86,7 +86,6 @@ namespace Online_Self_Ticketing
                 conn.Close();
             }
         }
-
         private void FormTiket_Load_1(object sender, EventArgs e)
         {
 
