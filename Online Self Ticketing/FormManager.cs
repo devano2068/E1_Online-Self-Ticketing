@@ -19,7 +19,6 @@ namespace Online_Self_Ticketing
         {
             InitializeComponent();
         }
-
         private void FormManager_Load(object sender, EventArgs e)
         {
             LoadJadwal();
