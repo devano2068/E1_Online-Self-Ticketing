@@ -66,6 +66,5 @@ namespace Online_Self_Ticketing
         {
             LoadFilm();
         }
-
     }
 }
