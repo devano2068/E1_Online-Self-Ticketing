@@ -16,7 +16,7 @@ namespace Online_Self_Ticketing
         SqlConnection conn = new SqlConnection(
     "Data Source=LAPTOP-3UJU5DJS\\VANTAMERAH;Initial Catalog=BioskopDB;Integrated Security=True");
 
-        // 🔥 TAMBAHAN: simpan role user
+        // TAMBAHAN: simpan role user
         public static string userRole;
 
         public Form1()
