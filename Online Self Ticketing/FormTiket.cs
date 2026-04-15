@@ -31,7 +31,6 @@ namespace Online_Self_Ticketing
             SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Film", conn);
             DataTable dt = new DataTable();
             da.Fill(dt);
-
             cmbFilm.DisplayMember = "judul";
             cmbFilm.ValueMember = "film_id";
             cmbFilm.DataSource = dt;
