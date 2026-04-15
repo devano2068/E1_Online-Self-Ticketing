@@ -19,7 +19,6 @@ namespace Online_Self_Ticketing
         {
             InitializeComponent();
         }
-
         private void FormJadwal_Load(object sender, EventArgs e)
         {
             LoadFilm();
