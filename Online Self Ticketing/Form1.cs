@@ -61,7 +61,7 @@ namespace Online_Self_Ticketing
 
                     MessageBox.Show("Login berhasil sebagai " + role);
 
-                    // 🔥 TAMBAHAN: simpan role
+                    // TAMBAHAN: simpan role
                     userRole = role;
 
                     if (role == "Admin")
