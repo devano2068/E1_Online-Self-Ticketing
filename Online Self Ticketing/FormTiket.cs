@@ -24,7 +24,6 @@ namespace Online_Self_Ticketing
             LoadFilm();
             LoadJadwal();
             LoadKursi();
-
             MessageBox.Show("Film dipilih: " + SelectedFilm);
         }
         void LoadFilm()
