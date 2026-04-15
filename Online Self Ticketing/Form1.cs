@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-
 namespace Online_Self_Ticketing
 {
     public partial class Form1 : Form
