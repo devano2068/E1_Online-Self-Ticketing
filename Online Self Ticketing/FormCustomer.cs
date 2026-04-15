@@ -82,7 +82,7 @@ namespace Online_Self_Ticketing
 
                 MessageBox.Show("Tiket berhasil dipesan!");
 
-                // 🔥 LANJUT KE PEMBAYARAN
+                // LANJUT KE PEMBAYARAN
                 FormPembayaran fp = new FormPembayaran();
 
                 fp.film = cmbFilm.Text;
