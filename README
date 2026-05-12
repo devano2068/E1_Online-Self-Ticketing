@@ -1,0 +1,196 @@
+# 🎬 Online Self Ticketing Bioskop
+
+## 👥 Tim
+- Nama Devano Pringgo Kusumo
+- Nama Rayvanza Davida Ramadhan
+- Nama Ikhsaan Hanafi
+
+---
+
+## 📌 Deskripsi
+Aplikasi ini adalah sistem pemesanan tiket bioskop berbasis Windows Form menggunakan C# dan SQL Server.
+
+---
+
+## ⚙️ Teknologi
+- C#
+- SQL Server
+- ADO.NET
+
+---
+
+## 🚀 Fitur
+- Login
+- Register
+- Lihat Film
+- Pesan Tiket
+- Pembayaran
+
+---
+
+## 🖼️ Screenshot Sistem
+
+### Form Login
+![Login](login.png)
+
+### Form Film
+![Film](film.png)
+
+### Form Pembayaran
+![Bayar](bayar.png)
+
+---
+
+## 🗄️ Database
+CREATE DATABASE BioskopDB;
+GO
+
+USE BioskopDB;
+GO
+
+CREATE TABLE [User] (
+    user_id INT IDENTITY(1,1) PRIMARY KEY,
+    nama VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    password VARCHAR(100),
+    role VARCHAR(20) -- Customer, Admin, Manager
+);
+
+CREATE TABLE Film (
+    film_id INT IDENTITY(1,1) PRIMARY KEY,
+    judul VARCHAR(100),
+    genre VARCHAR(50),
+    durasi INT
+);
+
+CREATE TABLE Studio (
+    studio_id INT IDENTITY(1,1) PRIMARY KEY,
+    nama_studio VARCHAR(50),
+    kapasitas INT
+);
+
+CREATE TABLE Kursi (
+    kursi_id INT IDENTITY(1,1) PRIMARY KEY,
+    studio_id INT,
+    nomor_kursi VARCHAR(10),
+
+    FOREIGN KEY (studio_id) REFERENCES Studio(studio_id)
+);
+
+CREATE TABLE Jadwal (
+    jadwal_id INT IDENTITY(1,1) PRIMARY KEY,
+    film_id INT,
+    studio_id INT,
+    tanggal DATE,
+    jam TIME,
+
+    FOREIGN KEY (film_id) REFERENCES Film(film_id),
+    FOREIGN KEY (studio_id) REFERENCES Studio(studio_id)
+);
+
+CREATE TABLE Tiket (
+    tiket_id INT IDENTITY(1,1) PRIMARY KEY,
+    jadwal_id INT,
+    kursi_id INT,
+    user_id INT,
+    harga INT,
+    status VARCHAR(50),
+
+    FOREIGN KEY (jadwal_id) REFERENCES Jadwal(jadwal_id),
+    FOREIGN KEY (kursi_id) REFERENCES Kursi(kursi_id),
+    FOREIGN KEY (user_id) REFERENCES [User](user_id)
+);
+
+CREATE TABLE Pembayaran (
+    pembayaran_id INT IDENTITY(1,1) PRIMARY KEY,
+    tiket_id INT UNIQUE,
+    metode VARCHAR(50),
+    status VARCHAR(50),
+    jumlah INT,
+
+    FOREIGN KEY (tiket_id) REFERENCES Tiket(tiket_id)
+);
+
+
+Jadwal (
+    jadwal_id INT IDENTITY PRIMARY KEY,
+    film_id INT,
+    tanggal DATETIME
+)
+
+SELECT * FROM Jadwal;
+
+INSERT INTO Jadwal (film_id, tanggal)
+VALUES (1, '2026-04-15 19:00:00');
+
+INSERT INTO Jadwal (film_id, tanggal)
+VALUES (2, '2026-04-15 21:00:00');
+
+SELECT COLUMN_NAME 
+FROM INFORMATION_SCHEMA.COLUMNS 
+WHERE TABLE_NAME = 'Jadwal';
+
+INSERT INTO Jadwal (film_id, studio_id, tanggal, jam)
+VALUES (1, 1, '2026-04-15', '19:00:00');
+
+SELECT * FROM Studio;
+
+INSERT INTO Studio (nama_studio)
+VALUES ('Studio 1');
+
+INSERT INTO Studio (nama_studio)
+VALUES ('Studio 2');
+
+SELECT * FROM Studio;
+
+INSERT INTO Jadwal (film_id, studio_id, tanggal)
+VALUES (1, 1, '2026-04-15 19:00:00');
+
+SELECT Jadwal.jadwal_id, Film.judul + ' - ' + CONVERT(varchar, Jadwal.tanggal) AS tampil
+FROM Jadwal
+JOIN Film ON Film.film_id = Jadwal.film_id
+
+SELECT Film.judul, Jadwal.tanggal
+FROM Jadwal
+INNER JOIN Film ON Film.film_id = Jadwal.film_id
+
+SELECT Film.judul,
+       COUNT(Tiket.tiket_id) AS total_tiket,
+       SUM(Tiket.harga) AS total_pendapatan
+FROM Tiket
+JOIN Jadwal ON Tiket.jadwal_id = Jadwal.jadwal_id
+JOIN Film ON Jadwal.film_id = Film.film_id
+WHERE Tiket.status = 'Paid'
+GROUP BY Film.judul
+
+
+
+
+SELECT Film.judul,
+       COUNT(Tiket.tiket_id) AS total_tiket,
+       SUM(Tiket.harga) AS total_pendapatan
+FROM Tiket
+JOIN Jadwal ON Tiket.jadwal_id = Jadwal.jadwal_id
+JOIN Film ON Jadwal.film_id = Film.film_id
+WHERE Tiket.status = 'Paid'
+GROUP BY Film.judul
+
+SELECT * FROM Tiket;
+
+UPDATE Tiket
+SET status = 'Paid'
+WHERE tiket_id = @id;
+
+UPDATE Tiket
+SET status = 'Paid'
+WHERE tiket_id = 1;
+
+INSERT INTO [User] (username, password, role)
+VALUES ('manager', '123', 'Manager');
+
+INSERT INTO [User] (nama, email, password, role)
+VALUES ('Manager Bioskop', 'manager@gmail.com', '123', 'Manager');
+
+SELECT * FROM [User];
+
+SELECT * FROM [User];
