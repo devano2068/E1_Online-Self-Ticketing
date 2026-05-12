@@ -24,7 +24,7 @@ namespace Online_Self_Ticketing
         {
             this.BackgroundImageLayout = ImageLayout.Stretch;
 
-            // --- SEMBUNYIKAN LABEL LAMA ---
+            // --- SEMBUNYIKAN LABEL LAMA --
             lblNama.Visible = false;
             lblEmail.Visible = false;
             lblPassword.Visible = false;
