@@ -37,9 +37,9 @@
             // 
             // btnHapus
             // 
-            this.btnHapus.Location = new System.Drawing.Point(483, 234);
+            this.btnHapus.Location = new System.Drawing.Point(432, 234);
             this.btnHapus.Name = "btnHapus";
-            this.btnHapus.Size = new System.Drawing.Size(83, 45);
+            this.btnHapus.Size = new System.Drawing.Size(134, 45);
             this.btnHapus.TabIndex = 0;
             this.btnHapus.Text = "Hapus";
             this.btnHapus.UseVisualStyleBackColor = true;
@@ -49,7 +49,7 @@
             // 
             this.btnTambah.Location = new System.Drawing.Point(227, 234);
             this.btnTambah.Name = "btnTambah";
-            this.btnTambah.Size = new System.Drawing.Size(87, 45);
+            this.btnTambah.Size = new System.Drawing.Size(137, 45);
             this.btnTambah.TabIndex = 1;
             this.btnTambah.Text = "Tambah";
             this.btnTambah.UseVisualStyleBackColor = true;
@@ -76,6 +76,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::Online_Self_Ticketing.Properties.Resources.background_tiket;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.txtNomorKursi);
             this.Controls.Add(this.dataGridView1);

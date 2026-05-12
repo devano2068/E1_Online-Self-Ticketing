@@ -28,32 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.lblJadwal = new System.Windows.Forms.DataGridView();
+            this.lblLaporan = new System.Windows.Forms.DataGridView();
             this.btnLogout = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblJadwal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblLaporan)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // lblJadwal
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(776, 150);
-            this.dataGridView1.TabIndex = 0;
+            this.lblJadwal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.lblJadwal.Location = new System.Drawing.Point(12, 12);
+            this.lblJadwal.Name = "lblJadwal";
+            this.lblJadwal.RowHeadersWidth = 62;
+            this.lblJadwal.RowTemplate.Height = 28;
+            this.lblJadwal.Size = new System.Drawing.Size(859, 150);
+            this.lblJadwal.TabIndex = 0;
             // 
-            // dataGridView2
+            // lblLaporan
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(12, 184);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersWidth = 62;
-            this.dataGridView2.RowTemplate.Height = 28;
-            this.dataGridView2.Size = new System.Drawing.Size(776, 147);
-            this.dataGridView2.TabIndex = 1;
+            this.lblLaporan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.lblLaporan.Location = new System.Drawing.Point(12, 184);
+            this.lblLaporan.Name = "lblLaporan";
+            this.lblLaporan.RowHeadersWidth = 62;
+            this.lblLaporan.RowTemplate.Height = 28;
+            this.lblLaporan.Size = new System.Drawing.Size(859, 147);
+            this.lblLaporan.TabIndex = 1;
             // 
             // btnLogout
             // 
@@ -69,23 +69,25 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackgroundImage = global::Online_Self_Ticketing.Properties.Resources.background_tiket;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(917, 450);
             this.Controls.Add(this.btnLogout);
-            this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.lblLaporan);
+            this.Controls.Add(this.lblJadwal);
             this.Name = "FormManager";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.FormManager_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblJadwal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblLaporan)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView lblJadwal;
+        private System.Windows.Forms.DataGridView lblLaporan;
         private System.Windows.Forms.Button btnLogout;
     }
 }

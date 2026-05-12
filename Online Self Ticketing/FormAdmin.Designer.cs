@@ -1,6 +1,6 @@
 ﻿namespace Online_Self_Ticketing
 {
-    partial class FormJadwal
+    partial class FormAdmin
     {
         /// <summary>
         /// Required designer variable.
@@ -33,6 +33,7 @@
             this.dtTanggal = new System.Windows.Forms.DateTimePicker();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnKursi = new System.Windows.Forms.Button();
+            this.btnHapus = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,9 +47,9 @@
             // 
             // btnSimpan
             // 
-            this.btnSimpan.Location = new System.Drawing.Point(180, 188);
+            this.btnSimpan.Location = new System.Drawing.Point(140, 188);
             this.btnSimpan.Name = "btnSimpan";
-            this.btnSimpan.Size = new System.Drawing.Size(89, 42);
+            this.btnSimpan.Size = new System.Drawing.Size(150, 42);
             this.btnSimpan.TabIndex = 1;
             this.btnSimpan.Text = "Simpan";
             this.btnSimpan.UseVisualStyleBackColor = true;
@@ -73,25 +74,38 @@
             // 
             // btnKursi
             // 
-            this.btnKursi.Location = new System.Drawing.Point(467, 188);
+            this.btnKursi.Location = new System.Drawing.Point(296, 188);
             this.btnKursi.Name = "btnKursi";
-            this.btnKursi.Size = new System.Drawing.Size(99, 42);
+            this.btnKursi.Size = new System.Drawing.Size(168, 42);
             this.btnKursi.TabIndex = 4;
             this.btnKursi.Text = "Edit Kursi";
             this.btnKursi.UseVisualStyleBackColor = true;
             this.btnKursi.Click += new System.EventHandler(this.btnKursi_Click);
             // 
-            // FormJadwal
+            // btnHapus
+            // 
+            this.btnHapus.Location = new System.Drawing.Point(473, 188);
+            this.btnHapus.Name = "btnHapus";
+            this.btnHapus.Size = new System.Drawing.Size(152, 42);
+            this.btnHapus.TabIndex = 5;
+            this.btnHapus.Text = "Hapus";
+            this.btnHapus.UseVisualStyleBackColor = true;
+            this.btnHapus.Click += new System.EventHandler(this.btnHapus_Click);
+            // 
+            // FormAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::Online_Self_Ticketing.Properties.Resources.background_tiket;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnHapus);
             this.Controls.Add(this.btnKursi);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.dtTanggal);
             this.Controls.Add(this.btnSimpan);
             this.Controls.Add(this.cmbFilm);
-            this.Name = "FormJadwal";
+            this.Name = "FormAdmin";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.FormJadwal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -106,5 +120,6 @@
         private System.Windows.Forms.DateTimePicker dtTanggal;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnKursi;
+        private System.Windows.Forms.Button btnHapus;
     }
 }

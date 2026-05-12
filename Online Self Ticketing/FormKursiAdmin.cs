@@ -14,12 +14,52 @@ namespace Online_Self_Ticketing
     public partial class FormKursiAdmin : Form
     {
         SqlConnection conn = new SqlConnection(
-"Data Source=LAPTOP-3UJU5DJS\\VANTAMERAH;Initial Catalog=BioskopDB;Integrated Security=True");
+"Data Source=DESKTOP-KK2HPK1;Initial Catalog=BioskopDB;Integrated Security=True");
         public FormKursiAdmin()
         {
             InitializeComponent();
+            ApplyStyling();
         }
 
+        private void ApplyStyling()
+        {
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+
+            // --- TOMBOL SIMPAN ---
+            btnTambah.BackColor = Color.FromArgb(180, 140, 80, 0); // emas
+            btnTambah.ForeColor = Color.White;
+            btnTambah.FlatStyle = FlatStyle.Flat;
+            btnTambah.FlatAppearance.BorderColor = Color.FromArgb(200, 200, 160, 0);
+            btnTambah.FlatAppearance.BorderSize = 1;
+            btnTambah.FlatAppearance.MouseOverBackColor = Color.FromArgb(220, 180, 120, 0);
+            btnTambah.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 120, 70, 0);
+            btnTambah.Font = new Font("Arial", 10, FontStyle.Bold);
+            btnTambah.Cursor = Cursors.Hand;
+            
+
+            // --- TOMBOL HAPUS ---
+            btnHapus.BackColor = Color.FromArgb(160, 140, 30, 30); // merah gelap
+            btnHapus.ForeColor = Color.White;
+            btnHapus.FlatStyle = FlatStyle.Flat;
+            btnHapus.FlatAppearance.BorderColor = Color.FromArgb(180, 180, 50, 50);
+            btnHapus.FlatAppearance.BorderSize = 1;
+            btnHapus.FlatAppearance.MouseOverBackColor = Color.FromArgb(200, 180, 50, 50);
+            btnHapus.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 120, 20, 20);
+            btnHapus.Font = new Font("Arial", 10, FontStyle.Bold);
+            btnHapus.Cursor = Cursors.Hand;
+
+            // Tombol sejajar tengah dengan jarak rata
+            int centerX = this.ClientSize.Width / 2;
+            btnTambah.Left = centerX  / 2;
+            btnHapus.Left = btnTambah.Right + 20;
+
+            // Samakan tinggi tombol
+            btnTambah.Height = 35;
+            btnHapus.Height = 35;
+            btnTambah.Top = btnHapus.Top;
+            btnHapus.Top = btnTambah.Top;
+            
+        }
         private void FormKursiAdmin_Load(object sender, EventArgs e)
         {
 
@@ -59,7 +99,7 @@ namespace Online_Self_Ticketing
         {
             try
             {
-                int id = Convert.ToInt32(dataGridView1.CurrentRow.Cells["kursi_id"].Value);
+                  int id = Convert.ToInt32(dataGridView1.CurrentRow.Cells["kursi_id"].Value);
                 conn.Open();
 
                 SqlCommand cmd = new SqlCommand(
