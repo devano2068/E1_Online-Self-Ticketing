@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Online_Self_Ticketing
 {
-    public partial class FormPembayaran : Form
+    public partial class FormPembayaran : Form // form bayar
     {
         public string film;
         public string jadwal;
