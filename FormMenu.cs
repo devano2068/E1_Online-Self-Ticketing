@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Online_Self_Ticketing
 {
-    public partial class FormMenu : Form
+    public partial class FormMenu : Form// form menu untuk admin
     {
         public FormMenu()
         {
