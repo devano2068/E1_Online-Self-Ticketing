@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Online_Self_Ticketing
 {
-    public partial class Rekapdata : Form
+    public partial class Rekapdata : Form// form rekap data
     {
         public Rekapdata()
         {
