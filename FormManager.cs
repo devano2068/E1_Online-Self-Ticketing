@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Online_Self_Ticketing
 {
-    public partial class FormManager : Form
+    public partial class FormManager : Form // form manager lihat aktivitas penjuakan
     {
         SqlConnection conn = new SqlConnection(
             @"Data Source=LAPTOP-BUHABIQL;Initial Catalog=BioskopDB;User ID=sa;Password=vano7474;TrustServerCertificate=True");
