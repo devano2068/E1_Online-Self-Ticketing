@@ -8,7 +8,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Online_Self_Ticketing
 {
-    public partial class FormDashboard : Form
+    public partial class FormDashboard : Form // lihat data penjualan
     {
         // Hubungan Koneksi Database
         string connString = @"Data Source=LAPTOP-BUHABIQL;Initial Catalog=BioskopDB;User ID=sa;Password=vano7474;TrustServerCertificate=True";
