@@ -6,7 +6,7 @@ using CrystalDecisions.CrystalReports.Engine; // Penting untuk Crystal Report
 
 namespace Online_Self_Ticketing
 {
-    public partial class FormCetak : Form
+    public partial class FormCetak : Form // cetak rtp
     {
         // 1. Ganti string ini dengan Connection String database kamu
         string connString = @"Data Source=LAPTOP-BUHABIQL;Initial Catalog=BioskopDB;User ID=sa;Password=vano7474;TrustServerCertificate=True";
