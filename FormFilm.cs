@@ -20,11 +20,12 @@ namespace Online_Self_Ticketing
     public partial class FormFilm : Form
     {
         SqlConnection conn = new SqlConnection(
-            "Data Source=DESKTOP-KK2HPK1;Initial Catalog=BioskopDB;Integrated Security=True");
+            @"Data Source=LAPTOP-BUHABIQL;Initial Catalog=BioskopDB;User ID=sa;Password=vano7474;TrustServerCertificate=True");
 
         // Untuk Binding
         private DataTable dtFilm = new DataTable();
         private BindingSource bindingSource = new BindingSource();
+        private int selectedFilmId = -1;
 
         public FormFilm()
         {
@@ -117,8 +118,20 @@ namespace Online_Self_Ticketing
             LoadFilm();
             SetupBinding();
             ApplyStyling();
-        }
+            AturKolomFilm();
 
+        }
+        void AturKolomFilm()
+        {
+            if (dataGridView1.Columns.Count == 0) return;
+
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+
+            dataGridView1.Columns["film_id"].Width = 60;
+            dataGridView1.Columns["judul"].Width = 180;
+            dataGridView1.Columns["genre"].Width = 120;
+            dataGridView1.Columns["durasi"].Width = 80;
+        }
         // =============================================
         // LOAD DATA menggunakan VIEW
         // =============================================
@@ -234,8 +247,19 @@ namespace Online_Self_Ticketing
                 cmd.ExecuteNonQuery();
                 conn.Close();
 
-                MessageBox.Show(output.Value.ToString());
-                LoadFilm();
+                string pesan = output.Value.ToString();
+
+                if (pesan.Contains("tidak dapat dihapus"))
+                {
+                    MessageBox.Show(pesan, "Tidak Dapat Dihapus",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show(pesan, "Berhasil",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadFilm();
+                }
             }
             catch (Exception ex)
             {
@@ -252,6 +276,7 @@ namespace Online_Self_Ticketing
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                selectedFilmId = Convert.ToInt32(row.Cells["film_id"].Value);
                 txtJudul.Text = row.Cells["judul"].Value?.ToString();
                 txtGenre.Text = row.Cells["genre"].Value?.ToString();
                 txtDurasi.Text = row.Cells["durasi"].Value?.ToString();
@@ -272,11 +297,62 @@ namespace Online_Self_Ticketing
             txtJudul.Text = "";
             txtGenre.Text = "";
             txtDurasi.Text = "";
+            selectedFilmId = -1;
         }
 
         private void bindingNavigator1_RefreshItems(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (selectedFilmId == -1)
+            {
+                MessageBox.Show("Pilih film dulu dari tabel!");
+                return;
+            }
+
+            if (txtJudul.Text == "" || txtGenre.Text == "" || txtDurasi.Text == "")
+            {
+                MessageBox.Show("Semua field harus diisi!");
+                return;
+            }
+
+            try
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("sp_UpdateFilm", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@film_id", selectedFilmId);
+                cmd.Parameters.AddWithValue("@judul", txtJudul.Text.Trim());
+                cmd.Parameters.AddWithValue("@genre", txtGenre.Text.Trim());
+                cmd.Parameters.AddWithValue("@durasi", int.Parse(txtDurasi.Text.Trim()));
+
+                SqlParameter output = new SqlParameter("@result", SqlDbType.NVarChar, 100);
+                output.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(output);
+
+                cmd.ExecuteNonQuery();
+                conn.Close();
+
+                MessageBox.Show(output.Value.ToString());
+                LoadFilm();
+                ClearForm();
+                selectedFilmId = -1;
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Durasi harus berupa angka!");
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Update: " + ex.Message);
+                conn.Close();
+            }
         }
     }
 }

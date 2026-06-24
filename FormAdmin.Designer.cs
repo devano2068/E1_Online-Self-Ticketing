@@ -40,16 +40,18 @@
             // cmbFilm
             // 
             this.cmbFilm.FormattingEnabled = true;
-            this.cmbFilm.Location = new System.Drawing.Point(273, 118);
+            this.cmbFilm.Location = new System.Drawing.Point(243, 94);
+            this.cmbFilm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbFilm.Name = "cmbFilm";
-            this.cmbFilm.Size = new System.Drawing.Size(200, 28);
+            this.cmbFilm.Size = new System.Drawing.Size(178, 24);
             this.cmbFilm.TabIndex = 0;
             // 
             // btnSimpan
             // 
-            this.btnSimpan.Location = new System.Drawing.Point(140, 188);
+            this.btnSimpan.Location = new System.Drawing.Point(124, 150);
+            this.btnSimpan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSimpan.Name = "btnSimpan";
-            this.btnSimpan.Size = new System.Drawing.Size(150, 42);
+            this.btnSimpan.Size = new System.Drawing.Size(133, 34);
             this.btnSimpan.TabIndex = 1;
             this.btnSimpan.Text = "Simpan";
             this.btnSimpan.UseVisualStyleBackColor = true;
@@ -57,26 +59,30 @@
             // 
             // dtTanggal
             // 
-            this.dtTanggal.Location = new System.Drawing.Point(273, 66);
+            this.dtTanggal.Location = new System.Drawing.Point(243, 53);
+            this.dtTanggal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtTanggal.Name = "dtTanggal";
-            this.dtTanggal.Size = new System.Drawing.Size(200, 26);
+            this.dtTanggal.Size = new System.Drawing.Size(178, 22);
             this.dtTanggal.TabIndex = 2;
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(37, 288);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 216);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(736, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(693, 133);
             this.dataGridView1.TabIndex = 3;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // btnKursi
             // 
-            this.btnKursi.Location = new System.Drawing.Point(296, 188);
+            this.btnKursi.Location = new System.Drawing.Point(263, 150);
+            this.btnKursi.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnKursi.Name = "btnKursi";
-            this.btnKursi.Size = new System.Drawing.Size(168, 42);
+            this.btnKursi.Size = new System.Drawing.Size(149, 34);
             this.btnKursi.TabIndex = 4;
             this.btnKursi.Text = "Edit Kursi";
             this.btnKursi.UseVisualStyleBackColor = true;
@@ -84,9 +90,10 @@
             // 
             // btnHapus
             // 
-            this.btnHapus.Location = new System.Drawing.Point(473, 188);
+            this.btnHapus.Location = new System.Drawing.Point(420, 150);
+            this.btnHapus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnHapus.Name = "btnHapus";
-            this.btnHapus.Size = new System.Drawing.Size(152, 42);
+            this.btnHapus.Size = new System.Drawing.Size(135, 34);
             this.btnHapus.TabIndex = 5;
             this.btnHapus.Text = "Hapus";
             this.btnHapus.UseVisualStyleBackColor = true;
@@ -94,17 +101,18 @@
             // 
             // FormAdmin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Online_Self_Ticketing.Properties.Resources.background_tiket;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(711, 360);
             this.Controls.Add(this.btnHapus);
             this.Controls.Add(this.btnKursi);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.dtTanggal);
             this.Controls.Add(this.btnSimpan);
             this.Controls.Add(this.cmbFilm);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormAdmin";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.FormJadwal_Load);

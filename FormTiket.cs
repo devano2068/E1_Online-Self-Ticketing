@@ -14,7 +14,7 @@ namespace Online_Self_Ticketing
     public partial class FormTiket : Form
     {
         SqlConnection conn = new SqlConnection(
-            "Data Source=DESKTOP-KK2HPK1;Initial Catalog=BioskopDB;Integrated Security=True");
+            @"Data Source=LAPTOP-BUHABIQL;Initial Catalog=BioskopDB;User ID=sa;Password=vano7474;TrustServerCertificate=True");
         public FormTiket()
         {
             InitializeComponent();

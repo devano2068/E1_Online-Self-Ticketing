@@ -14,7 +14,8 @@ namespace Online_Self_Ticketing
     public partial class FormAdmin : Form
     {
         SqlConnection conn = new SqlConnection(
-        "Data Source=DESKTOP-KK2HPK1;Initial Catalog=BioskopDB;Integrated Security=True");
+        @"Data Source=LAPTOP-BUHABIQL;Initial Catalog=BioskopDB;User ID=sa;Password=vano7474;TrustServerCertificate=True");
+        private bool _isLoading = false;
         public FormAdmin()
         {
             InitializeComponent();
@@ -154,9 +155,23 @@ namespace Online_Self_Ticketing
         }
         private void FormJadwal_Load(object sender, EventArgs e)
         {
-             LoadFilm();
+            _isLoading = true;
+            LoadFilm();
+            _isLoading = false;
             LoadJadwal();
             ApplyStyling();
+            AturKolomJadwal();
+        }
+
+        void AturKolomJadwal()
+        {
+            if (dataGridView1.Columns.Count == 0) return;
+
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+
+            dataGridView1.Columns["ID"].Width = 50;
+            dataGridView1.Columns["Judul Film"].Width = 200;
+            dataGridView1.Columns["Tanggal"].Width = 120;
         }
         void LoadFilm()
         {
@@ -169,17 +184,23 @@ namespace Online_Self_Ticketing
             cmbFilm.DataSource = dt;
         }
 
+
         void LoadJadwal()
         {
+            if (_isLoading) return; // cegah load ganda
+
             SqlDataAdapter da = new SqlDataAdapter(
-                "SELECT Jadwal.jadwal_id, Film.judul, Jadwal.tanggal " +
+                "SELECT Jadwal.jadwal_id AS 'ID', Film.judul AS 'Judul Film', CONVERT(VARCHAR, Jadwal.tanggal, 106) AS 'Tanggal' " +
                 "FROM Jadwal INNER JOIN Film ON Jadwal.film_id = Film.film_id",
                 conn);
 
             DataTable dt = new DataTable();
             da.Fill(dt);
 
+            dataGridView1.DataSource = null;
             dataGridView1.DataSource = dt;
+
+            AturKolomJadwal();
         }
 
         private void btnSimpan_Click(object sender, EventArgs e)
@@ -225,7 +246,7 @@ namespace Online_Self_Ticketing
                 }
 
                 int jadwalId = Convert.ToInt32(
-                    dataGridView1.CurrentRow.Cells["jadwal_id"].Value);
+                    dataGridView1.CurrentRow.Cells["ID"].Value);
 
                 DialogResult result = MessageBox.Show(
                     "Yakin ingin menghapus jadwal ini?",
@@ -261,6 +282,11 @@ namespace Online_Self_Ticketing
                 MessageBox.Show("Terjadi kesalahan: " + ex.Message);
                 conn.Close();
             }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
