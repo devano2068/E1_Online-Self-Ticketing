@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-namespace Online_Self_Ticketing
+namespace Online_Self_Ticketing // Form Utama untuk Login User dan Koneksi Database
 {
     public partial class Login : Form
     {
