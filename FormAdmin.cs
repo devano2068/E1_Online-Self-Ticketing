@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Online_Self_Ticketing
 {
-    public partial class FormAdmin : Form
+    public partial class FormAdmin : Form //form admin jadwal
     {
         SqlConnection conn = new SqlConnection(
         @"Data Source=LAPTOP-BUHABIQL;Initial Catalog=BioskopDB;User ID=sa;Password=vano7474;TrustServerCertificate=True");
