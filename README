@@ -1,196 +1,116 @@
-# 🎬 Online Self Ticketing Bioskop
+# E1 Online Self Ticketing - UCP 2
 
-## 👥 Tim
-- Nama Devano Pringgo Kusumo
-- Nama Rayvanza Davida Ramadhan
-- Nama Ikhsaan Hanafi
+Aplikasi ticketing bioskop berbasis C# WinForms dengan SQL Server.
 
 ---
 
-## 📌 Deskripsi
-Aplikasi ini adalah sistem pemesanan tiket bioskop berbasis Windows Form menggunakan C# dan SQL Server.
+## Fitur UCP 2
+
+### 1. Stored Procedures
+Semua operasi CRUD menggunakan Stored Procedure:
+
+| Stored Procedure | Fungsi |
+|---|---|
+| `sp_InsertFilm` | Tambah film + validasi duplikat judul |
+| `sp_UpdateFilm` | Update film + log waktu perubahan |
+| `sp_DeleteFilm` | Hapus film + cek relasi ke Jadwal |
+| `sp_SearchFilm` | Cari film by judul atau genre |
+| `sp_InsertTiket` | Pesan tiket + cek kursi sudah dipesan |
+| `sp_UpdateStatusTiket` | Update status Booked/Paid/Cancelled |
+| `sp_DeleteTiket` | Hapus tiket (hanya status Cancelled) |
+| `sp_InsertUser` | Register user + validasi email duplikat |
+| `sp_LoginUser` | Login dengan validasi role |
+
+### 2. Views (pengganti SELECT)
+
+| View | Isi |
+|---|---|
+| `vw_SemuaFilm` | Daftar semua film |
+| `vw_JadwalLengkap` | Jadwal + nama film |
+| `vw_TiketLengkap` | Tiket + info customer, film, kursi |
+| `vw_KursiTersedia` | Kursi yang belum dipesan |
+| `vw_RekapPenjualan` | Total tiket & pendapatan per film |
+
+### 3. DataGridView Binding
+DataGridView di FormKelolaFilm menggunakan `BindingSource` yang terhubung ke DataTable. TextBox (Judul, Genre, Durasi) di-bind langsung ke BindingSource sehingga otomatis sinkron saat navigasi data.
+
+### 4. Binding Navigator
+BindingNavigator terhubung ke BindingSource — tombol navigasi (First, Previous, Next, Last) otomatis berpindah antar baris dan mengisi TextBox sesuai data yang dipilih.
 
 ---
 
-## ⚙️ Teknologi
-- C#
-- SQL Server
-- ADO.NET
+## Skenario SQL Injection
+
+### Lokasi
+Form Login (`Form1.cs`) — tombol **"Login (SQLi Demo)"**
+
+### Query yang Rentan
+```sql
+SELECT * FROM [User] WHERE email='' AND password=''
+```
+
+### Cara Eksploitasi
+
+#### Skenario 1 — Bypass Login Tanpa Password
+**Input Email:**
+```
+' OR '1'='1
+```
+**Input Password:**
+```
+' OR '1'='1
+```
+**Query yang terbentuk:**
+```sql
+SELECT * FROM [User] WHERE email='' OR '1'='1' AND password='' OR '1'='1'
+```
+**Hasil:** Login berhasil sebagai user pertama di database tanpa mengetahui email/password apapun.
+
+#### Skenario 2 — Login sebagai Admin Tertentu
+**Input Email:**
+```
+admin@bioskop.com' --
+```
+**Input Password:**
+```
+apapun
+```
+**Query yang terbentuk:**
+```sql
+SELECT * FROM [User] WHERE email='admin@bioskop.com' --' AND password='apapun'
+```
+**Hasil:** Bagian `AND password=...` di-comment out, login langsung berhasil sebagai admin tanpa password.
+
+#### Skenario 3 — Tampilkan Semua User
+**Input Email:**
+```
+' OR 1=1 --
+```
+**Query yang terbentuk:**
+```sql
+SELECT * FROM [User] WHERE email='' OR 1=1 --' AND password=''
+```
+**Hasil:** Mengembalikan seluruh data user di database.
+
+### Cara Pencegahan (yang sudah diterapkan di btnLogin)
+- Menggunakan **Stored Procedure** (`sp_LoginUser`)
+- Menggunakan **parameterized query** dengan `cmd.Parameters.AddWithValue`
+- Input user tidak langsung digabung ke string query
 
 ---
 
-## 🚀 Fitur
-- Login
-- Register
-- Lihat Film
-- Pesan Tiket
-- Pembayaran
+## Struktur Database
+
+```
+BioskopDB
+├── Film (film_id, judul, genre, durasi)
+├── Jadwal (jadwal_id, film_id, tanggal, studio)
+├── Kursi (kursi_id, nomor_kursi, studio)
+├── Tiket (tiket_id, jadwal_id, kursi_id, user_id, harga, status)
+└── User (user_id, nama, email, password, role)
+```
 
 ---
 
-## 🖼️ Screenshot Sistem
-
-### Form Login
-![Login](login.png)
-
-### Form Film
-![Film](film.png)
-
-### Form Pembayaran
-![Bayar](bayar.png)
-
----
-
-## 🗄️ Database
-CREATE DATABASE BioskopDB;
-GO
-
-USE BioskopDB;
-GO
-
-CREATE TABLE [User] (
-    user_id INT IDENTITY(1,1) PRIMARY KEY,
-    nama VARCHAR(100),
-    email VARCHAR(100) UNIQUE,
-    password VARCHAR(100),
-    role VARCHAR(20) -- Customer, Admin, Manager
-);
-
-CREATE TABLE Film (
-    film_id INT IDENTITY(1,1) PRIMARY KEY,
-    judul VARCHAR(100),
-    genre VARCHAR(50),
-    durasi INT
-);
-
-CREATE TABLE Studio (
-    studio_id INT IDENTITY(1,1) PRIMARY KEY,
-    nama_studio VARCHAR(50),
-    kapasitas INT
-);
-
-CREATE TABLE Kursi (
-    kursi_id INT IDENTITY(1,1) PRIMARY KEY,
-    studio_id INT,
-    nomor_kursi VARCHAR(10),
-
-    FOREIGN KEY (studio_id) REFERENCES Studio(studio_id)
-);
-
-CREATE TABLE Jadwal (
-    jadwal_id INT IDENTITY(1,1) PRIMARY KEY,
-    film_id INT,
-    studio_id INT,
-    tanggal DATE,
-    jam TIME,
-
-    FOREIGN KEY (film_id) REFERENCES Film(film_id),
-    FOREIGN KEY (studio_id) REFERENCES Studio(studio_id)
-);
-
-CREATE TABLE Tiket (
-    tiket_id INT IDENTITY(1,1) PRIMARY KEY,
-    jadwal_id INT,
-    kursi_id INT,
-    user_id INT,
-    harga INT,
-    status VARCHAR(50),
-
-    FOREIGN KEY (jadwal_id) REFERENCES Jadwal(jadwal_id),
-    FOREIGN KEY (kursi_id) REFERENCES Kursi(kursi_id),
-    FOREIGN KEY (user_id) REFERENCES [User](user_id)
-);
-
-CREATE TABLE Pembayaran (
-    pembayaran_id INT IDENTITY(1,1) PRIMARY KEY,
-    tiket_id INT UNIQUE,
-    metode VARCHAR(50),
-    status VARCHAR(50),
-    jumlah INT,
-
-    FOREIGN KEY (tiket_id) REFERENCES Tiket(tiket_id)
-);
-
-
-Jadwal (
-    jadwal_id INT IDENTITY PRIMARY KEY,
-    film_id INT,
-    tanggal DATETIME
-)
-
-SELECT * FROM Jadwal;
-
-INSERT INTO Jadwal (film_id, tanggal)
-VALUES (1, '2026-04-15 19:00:00');
-
-INSERT INTO Jadwal (film_id, tanggal)
-VALUES (2, '2026-04-15 21:00:00');
-
-SELECT COLUMN_NAME 
-FROM INFORMATION_SCHEMA.COLUMNS 
-WHERE TABLE_NAME = 'Jadwal';
-
-INSERT INTO Jadwal (film_id, studio_id, tanggal, jam)
-VALUES (1, 1, '2026-04-15', '19:00:00');
-
-SELECT * FROM Studio;
-
-INSERT INTO Studio (nama_studio)
-VALUES ('Studio 1');
-
-INSERT INTO Studio (nama_studio)
-VALUES ('Studio 2');
-
-SELECT * FROM Studio;
-
-INSERT INTO Jadwal (film_id, studio_id, tanggal)
-VALUES (1, 1, '2026-04-15 19:00:00');
-
-SELECT Jadwal.jadwal_id, Film.judul + ' - ' + CONVERT(varchar, Jadwal.tanggal) AS tampil
-FROM Jadwal
-JOIN Film ON Film.film_id = Jadwal.film_id
-
-SELECT Film.judul, Jadwal.tanggal
-FROM Jadwal
-INNER JOIN Film ON Film.film_id = Jadwal.film_id
-
-SELECT Film.judul,
-       COUNT(Tiket.tiket_id) AS total_tiket,
-       SUM(Tiket.harga) AS total_pendapatan
-FROM Tiket
-JOIN Jadwal ON Tiket.jadwal_id = Jadwal.jadwal_id
-JOIN Film ON Jadwal.film_id = Film.film_id
-WHERE Tiket.status = 'Paid'
-GROUP BY Film.judul
-
-
-
-
-SELECT Film.judul,
-       COUNT(Tiket.tiket_id) AS total_tiket,
-       SUM(Tiket.harga) AS total_pendapatan
-FROM Tiket
-JOIN Jadwal ON Tiket.jadwal_id = Jadwal.jadwal_id
-JOIN Film ON Jadwal.film_id = Film.film_id
-WHERE Tiket.status = 'Paid'
-GROUP BY Film.judul
-
-SELECT * FROM Tiket;
-
-UPDATE Tiket
-SET status = 'Paid'
-WHERE tiket_id = @id;
-
-UPDATE Tiket
-SET status = 'Paid'
-WHERE tiket_id = 1;
-
-INSERT INTO [User] (username, password, role)
-VALUES ('manager', '123', 'Manager');
-
-INSERT INTO [User] (nama, email, password, role)
-VALUES ('Manager Bioskop', 'manager@gmail.com', '123', 'Manager');
-
-SELECT * FROM [User];
-
-SELECT * FROM [User];
+## Developer
+**Devano** — E1 | Universitas Muhammadiyah Yogyakarta
