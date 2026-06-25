@@ -14,7 +14,7 @@ namespace Online_Self_Ticketing
     public partial class FormAdmin : Form //form admin ke edit kusi
     {
         SqlConnection conn = new SqlConnection(
-        @"Data Source=LAPTOP-BUHABIQL;Initial Catalog=BioskopDB;User ID=sa;Password=vano7474;TrustServerCertificate=True");
+        @"Data Source=192.168.110.102;Initial Catalog=BioskopDB;User ID=sa;Password=vano7474");
         private bool _isLoading = false;
         public FormAdmin()
         {

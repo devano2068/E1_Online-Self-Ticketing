@@ -11,7 +11,7 @@ namespace Online_Self_Ticketing
     public partial class FormDashboard : Form // lihat data penjualan
     {
         // Hubungan Koneksi Database
-        string connString = @"Data Source=LAPTOP-BUHABIQL;Initial Catalog=BioskopDB;User ID=sa;Password=vano7474;TrustServerCertificate=True";
+        string connString = @"Data Source=192.168.110.102;Initial Catalog=BioskopDB;User ID=sa;Password=vano7474;";
         private DataTable dtExcelStorage = null;
         public FormDashboard()
         {

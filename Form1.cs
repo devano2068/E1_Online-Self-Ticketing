@@ -14,7 +14,7 @@ namespace Online_Self_Ticketing // Form Utama untuk Login User dan Koneksi Datab
     public partial class Login : Form
     {
         SqlConnection conn = new SqlConnection(
-            @"Data Source=LAPTOP-BUHABIQL;Initial Catalog=BioskopDB;User ID=sa;Password=vano7474;TrustServerCertificate=True");
+            @"Data Source=192.168.110.102;Initial Catalog=BioskopDB;User ID=sa;Password=vano7474");
 
         public static string userRole;
 
