@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Online_Self_Ticketing
 {
-    public partial class FormCustomer : Form // form pesan tiket
+    public partial class FormCustomer : Form // 4
     {
         SqlConnection conn = new SqlConnection(
         @"Data Source=192.168.110.102;Initial Catalog=BioskopDB;User ID=sa;Password=vano7474");
